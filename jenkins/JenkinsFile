@@ -4,7 +4,12 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git'
+                checkout([$class: 'GitSCM', 
+                          branches: [[name: '*/main']], 
+                          userRemoteConfigs: [[
+                              url: 'https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git',
+                              credentialsId: '01cc71e0-6736-4016-8247-117d39fb39b3'  // 
+                          ]]])
             }
         }
 
@@ -38,7 +43,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Opcional: fazer o deploy
+                    // Fazer o deploy da aplicação
                     // Por exemplo, você pode usar docker-compose ou kubectl aqui
                     sh 'docker run -d -p 3000:3000 nome-da-imagem'
                 }
@@ -50,7 +55,14 @@ pipeline {
         always {
             // Ações que devem ocorrer após a execução do pipeline
             archiveArtifacts artifacts: '**/test-results/**/*', allowEmptyArchive: true
-            junit '**/test-results/**/*.xml' // Se estiver usando JUnit
+            junit '**/test-results/**/*.xml' // Para relatórios de teste (JUnit ou outros formatos)
+        }
+        failure {
+            script {
+                // Em caso de falha, enviar um e-mail ou notificar
+                echo "Pipeline falhou. Tome uma ação!"
+            }
         }
     }
 }
+
