@@ -7,7 +7,7 @@ pipeline {
                 checkout([$class: 'GitSCM', 
                           branches: [[name: '*/main']], 
                           userRemoteConfigs: [[
-                              url: 'https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git',
+                              url: 'https://github.com/HBTHugo/Chat-em-tempo-real-websockets.git',
                               credentialsId: '01cc71e0-6736-4016-8247-117d39fb39b3'  // 
                           ]]])
             }
