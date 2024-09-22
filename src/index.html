@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socialzap</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Campo para o nome do usuário -->
+    <div id="user-info">
+        <input type="text" id="username" placeholder="Digite seu nome..." required />
+        <button id="enter-chat">Entrar no chat</button>
+    </div>
+
+    <!-- Chat (escondido até o usuário entrar) -->
+    <div id="chat" style="display: none;">
+        <ul id="messages"></ul>
+        <form id="input" autocomplete="off">
+            <input type="text" id="messageInput" placeholder="Digite sua mensagem..." />
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        var username = '';
+        var userColor = '';
+
+        // Função para gerar uma cor aleatória
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Quando o usuário clica para entrar no chat
+        document.getElementById('enter-chat').addEventListener('click', function() {
+            var inputUsername = document.getElementById('username').value;
+            if (inputUsername) {
+                username = inputUsername; // Armazena o nome do usuário
+                userColor = getRandomColor(); // Gera uma cor aleatória para o usuário
+                document.getElementById('user-info').style.display = 'none'; // Esconde o campo de nome
+                document.getElementById('chat').style.display = 'block'; // Exibe o chat
+            }
+        });
+
+        // Exibe uma mensagem no chat
+        function displayMessage(data) {
+            var item = document.createElement('li');
+            item.innerHTML = `<span style="color: ${data.color};">${data.user}</span>: ${data.message}`; // Exibe o nome colorido
+            document.getElementById('messages').appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        // Recebe as últimas 10 mensagens do servidor quando o usuário se conecta
+        socket.on('previousMessages', function(messages) {
+            messages.forEach(displayMessage); // Exibe cada mensagem recebida
+        });
+
+        // Envia a mensagem ao servidor junto com o nome e a cor do usuário
+        var form = document.getElementById('input');
+        var input = document.getElementById('messageInput');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (input.value && username) {
+                // Envia a mensagem, o nome e a cor do usuário para o servidor
+                socket.emit('chat message', { user: username, color: userColor, message: input.value });
+                input.value = '';
+            }
+        });
+
+        // Recebe as mensagens do servidor e exibe no chat
+        socket.on('chat message', displayMessage);
+    </script>
+</body>
+</html>
