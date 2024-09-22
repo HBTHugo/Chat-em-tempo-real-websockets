@@ -8,16 +8,16 @@ pipeline {
                           branches: [[name: '*/main']], 
                           userRemoteConfigs: [[
                               url: 'https://github.com/HBTHugo/Chat-em-tempo-real-websockets.git',
-                              credentialsId: '01cc71e0-6736-4016-8247-117d39fb39b3'  // 
-                          ]]])
+                              credentialsId: '01cc71e0-6736-4016-8247-117d39fb39b3'
+                          ]]] )
             }
         }
 
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Instala as dependências usando npm ou yarn
-                    sh 'npm install'  // ou 'yarn install'
+                    // Instala as dependências no Windows usando npm
+                    bat 'npm install'  // Use 'bat' para comandos do Windows
                 }
             }
         }
@@ -25,8 +25,8 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    // Executa os testes
-                    sh 'npm test'  // ou 'yarn test'
+                    // Executa os testes no Windows
+                    bat 'npm test'  // Use 'bat' para comandos do Windows
                 }
             }
         }
@@ -34,8 +34,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Constrói a imagem Docker
-                    sh 'docker build -t nome-da-imagem .'
+                    // Constrói a imagem Docker no Windows
+                    bat 'docker build -t nome-da-imagem .'  // Use 'bat' para comandos do Windows
                 }
             }
         }
@@ -43,9 +43,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Fazer o deploy da aplicação
-                    // Por exemplo, você pode usar docker-compose ou kubectl aqui
-                    sh 'docker run -d -p 3000:3000 nome-da-imagem'
+                    // Executa o deploy no Windows
+                    // Exemplo usando docker run
+                    bat 'docker run -d -p 3000:3000 nome-da-imagem'
                 }
             }
         }
@@ -59,10 +59,9 @@ pipeline {
         }
         failure {
             script {
-                // Em caso de falha, enviar um e-mail ou notificar
+                // Em caso de falha, enviar uma notificação
                 echo "Pipeline falhou. Tome uma ação!"
             }
         }
     }
 }
-
