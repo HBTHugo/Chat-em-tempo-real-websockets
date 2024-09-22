@@ -1,10 +1,9 @@
 {
   "name": "chat-em-tempo-real-websockets",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "dev": "tsx watch src/server.ts"
   },
   "repository": {
@@ -19,11 +18,13 @@
   },
   "homepage": "https://github.com/HBTHugo/Chat-em-tempo-real-websockets#readme",
   "devDependencies": {
+    "mocha": "^10.7.3",
     "tsx": "^4.19.1",
     "typescript": "^5.6.2"
   },
   "dependencies": {
     "express": "^4.21.0",
     "socket.io": "^4.8.0"
-  }
+  },
+  "description": ""
 }
