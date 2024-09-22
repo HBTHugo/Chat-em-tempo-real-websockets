@@ -1,0 +1,56 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // Instala as dependências usando npm ou yarn
+                    sh 'npm install'  // ou 'yarn install'
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    // Executa os testes
+                    sh 'npm test'  // ou 'yarn test'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Constrói a imagem Docker
+                    sh 'docker build -t nome-da-imagem .'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // Opcional: fazer o deploy
+                    // Por exemplo, você pode usar docker-compose ou kubectl aqui
+                    sh 'docker run -d -p 3000:3000 nome-da-imagem'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Ações que devem ocorrer após a execução do pipeline
+            archiveArtifacts artifacts: '**/test-results/**/*', allowEmptyArchive: true
+            junit '**/test-results/**/*.xml' // Se estiver usando JUnit
+        }
+    }
+}
