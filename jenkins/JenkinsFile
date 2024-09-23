@@ -26,14 +26,14 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Constrói a imagem Docker
-                bat 'docker build -t nome-da-imagem .' // Altere 'nome-da-imagem' conforme necessário
+                bat 'docker build -t chat-em-tempo-real-websockets .' // Altere 'nome-da-imagem' conforme necessário
             }
         }
 
         stage('Deploy') {
             steps {
                 // Executa o contêiner Docker
-                bat 'docker run -d -p 3000:3000 nome-da-imagem' // Certifique-se de que a porta esteja correta
+                bat 'docker run -d -p 3000:3000 chat-em-tempo-real-websockets' // Certifique-se de que a porta esteja correta
             }
         }
     }
