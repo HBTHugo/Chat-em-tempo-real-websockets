@@ -4,64 +4,59 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                checkout([$class: 'GitSCM', 
-                          branches: [[name: '*/main']], 
-                          userRemoteConfigs: [[
-                              url: 'https://github.com/HBTHugo/Chat-em-tempo-real-websockets.git',
-                              credentialsId: '01cc71e0-6736-4016-8247-117d39fb39b3'
-                          ]]] )
+                // Clona o repositório
+                checkout scm
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                script {
-                    // Instala as dependências no Windows usando npm
-                    bat 'npm install'
-                }
+                // Instala as dependências usando npm
+                bat 'npm install'
             }
         }
 
         stage('Run Tests') {
             steps {
-                script {
-                    // Executa os testes no Windows
-                    bat 'npm test'
-                }
+                // Executa os testes e gera o arquivo de resultados
+                bat 'npm test'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                script {
-                    // Constrói a imagem Docker no Windows
-                    bat 'docker build -t nome-da-imagem .'
-                }
+                // Constrói a imagem Docker
+                bat 'docker build -t nome-da-imagem .'
             }
         }
 
         stage('Deploy') {
             steps {
-                script {
-                    // Executa o deploy no Windows
-                    // Exemplo usando docker run
-                    bat 'docker run -d -p 3000:3000 nome-da-imagem'
-                }
+                // Executa o contêiner Docker
+                bat 'docker run -d -p 3000:3000 nome-da-imagem'
             }
         }
     }
 
     post {
         always {
-            // Ações que devem ocorrer após a execução do pipeline
-            archiveArtifacts artifacts: '**/test-results/**/*', allowEmptyArchive: true
-            junit '**/test-results/**/*.xml' // Para relatórios de teste (JUnit ou outros formatos)
-        }
-        failure {
+            // Arquiva o relatório de teste gerado pelo Mocha
+            junit '**/results.xml'
+
+            // Exibe uma mensagem se a pipeline falhar
             script {
-                // Em caso de falha, enviar uma notificação
-                echo "Pipeline falhou. Tome uma ação!"
+                if (currentBuild.result == 'FAILURE') {
+                    echo 'Pipeline falhou. Tome uma ação!'
+                }
             }
+        }
+
+        success {
+            echo 'Pipeline executada com sucesso!'
+        }
+
+        failure {
+            echo 'Houve uma falha na pipeline.'
         }
     }
 }

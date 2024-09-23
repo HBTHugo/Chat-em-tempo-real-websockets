@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.002" tests="1" failures="0">
+  <testsuite name="Root Suite" timestamp="2024-09-23T01:13:01" tests="0" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Teste Básico" timestamp="2024-09-23T01:13:01" tests="1" file="C:\Users\Heber\Desktop\Projeto petsaju\Chat-em-tempo-real-websockets\test\test.js" time="0.001" failures="0">
+    <testcase name="Teste Básico Deve retornar verdadeiro" time="0.000" classname="Deve retornar verdadeiro">
+    </testcase>
+  </testsuite>
+</testsuites>
