@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     // Instala as dependências no Windows usando npm
-                    bat 'npm install'  // Use 'bat' para comandos do Windows
+                    bat 'npm install'
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     // Executa os testes no Windows
-                    bat 'npm test'  // Use 'bat' para comandos do Windows
+                    bat 'npm test'
                 }
             }
         }
@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     // Constrói a imagem Docker no Windows
-                    bat 'docker build -t nome-da-imagem .'  // Use 'bat' para comandos do Windows
+                    bat 'docker build -t nome-da-imagem .'
                 }
             }
         }
