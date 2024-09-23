@@ -20,7 +20,8 @@ class App {
 
     // Inicializa o servidor HTTP
     listenServer() {
-        this.http.listen(3000, () => console.log('Server is running on port 3000'));
+        const PORT = process.env.PORT || 3000; // Usando variável de ambiente
+        this.http.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
     }
 
     // Escuta e trata os eventos de socket
@@ -56,6 +57,11 @@ class App {
     setupRoutes() {
         this.app.get('/', (req, res) => {
             res.sendFile(path.join(__dirname, 'index.html')); // Servir o HTML
+        });
+
+        // Tratamento de erros 404
+        this.app.use((req, res) => {
+            res.status(404).send('404 Not Found');
         });
     }
 }

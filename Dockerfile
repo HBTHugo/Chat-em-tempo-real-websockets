@@ -13,7 +13,7 @@ RUN npm install
 # Copia o restante dos arquivos do projeto para o contêiner
 COPY . .
 
-# Expõe a porta que sua aplicação vai rodar (3000 para o app)
+# Expondo a porta configurada
 EXPOSE 3000 
 
 # Comando para iniciar a aplicação

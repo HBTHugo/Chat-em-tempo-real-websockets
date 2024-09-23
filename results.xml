@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.135" tests="3" failures="0">
-  <testsuite name="Root Suite" timestamp="2024-09-23T20:25:00" tests="0" time="0.000" failures="0">
+<testsuites name="Mocha Tests" time="0.086" tests="3" failures="0">
+  <testsuite name="Root Suite" timestamp="2024-09-23T21:38:23" tests="0" time="0.000" failures="0">
   </testsuite>
-  <testsuite name="Teste Básico" timestamp="2024-09-23T20:25:00" tests="1" file="C:\Users\Heber\Desktop\Projeto petsaju\Chat-em-tempo-real-websockets\test\test.js" time="0.002" failures="0">
+  <testsuite name="Teste Básico" timestamp="2024-09-23T21:38:23" tests="1" file="C:\Users\Heber\Desktop\Projeto petsaju\Chat-em-tempo-real-websockets\test\test.js" time="0.002" failures="0">
     <testcase name="Teste Básico Deve retornar verdadeiro" time="0.000" classname="Deve retornar verdadeiro">
     </testcase>
   </testsuite>
-  <testsuite name="Teste de Conexão WebSocket" timestamp="2024-09-23T20:25:00" tests="1" file="C:\Users\Heber\Desktop\Projeto petsaju\Chat-em-tempo-real-websockets\test\test.js" time="0.057" failures="0">
+  <testsuite name="Teste de Conexão WebSocket" timestamp="2024-09-23T21:38:23" tests="1" file="C:\Users\Heber\Desktop\Projeto petsaju\Chat-em-tempo-real-websockets\test\test.js" time="0.047" failures="0">
     <testcase name="Teste de Conexão WebSocket Deve conectar ao servidor WebSocket" time="0.000" classname="Deve conectar ao servidor WebSocket">
     </testcase>
   </testsuite>
-  <testsuite name="Teste de Envio de Mensagem" timestamp="2024-09-23T20:25:00" tests="1" file="C:\Users\Heber\Desktop\Projeto petsaju\Chat-em-tempo-real-websockets\test\test.js" time="0.075" failures="0">
-    <testcase name="Teste de Envio de Mensagem Deve enviar e receber uma mensagem" time="0.048" classname="Deve enviar e receber uma mensagem">
+  <testsuite name="Teste de Envio de Mensagem" timestamp="2024-09-23T21:38:23" tests="1" file="C:\Users\Heber\Desktop\Projeto petsaju\Chat-em-tempo-real-websockets\test\test.js" time="0.036" failures="0">
+    <testcase name="Teste de Envio de Mensagem Deve enviar e receber uma mensagem" time="0.003" classname="Deve enviar e receber uma mensagem">
     </testcase>
   </testsuite>
 </testsuites>
