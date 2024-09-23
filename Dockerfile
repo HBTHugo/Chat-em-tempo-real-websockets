@@ -5,7 +5,7 @@ FROM node:18
 WORKDIR /app
 
 # Copia o package.json e package-lock.json para o contêiner
-COPY package*.json ./
+COPY package*.json ./ 
 
 # Instala as dependências
 RUN npm install
@@ -13,8 +13,9 @@ RUN npm install
 # Copia o restante dos arquivos do projeto para o contêiner
 COPY . .
 
-# Expõe a porta que sua aplicação vai rodar
-EXPOSE 3000
+# Expõe a porta que sua aplicação vai rodar (3000 para o app)
+EXPOSE 3000 
 
 # Comando para iniciar a aplicação
 CMD ["npm", "run", "dev"]
+
