@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter mocha-junit-reporter",
+    "test": "mocha --reporter mocha-junit-reporter --reporter-options mochaFile=results.xml",
     "dev": "tsx watch src/server.ts"
   },
   "repository": {
