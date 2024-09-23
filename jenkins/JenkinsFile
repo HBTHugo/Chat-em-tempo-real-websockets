@@ -12,28 +12,28 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // Instala as dependências usando npm
-                bat 'npm install'
+                bat 'npm install' // Use 'sh' se estiver em um ambiente Unix
             }
         }
 
         stage('Run Tests') {
             steps {
                 // Executa os testes e gera o arquivo de resultados
-                bat 'npm test'
+                bat 'npm test' // Certifique-se de que os resultados estejam no formato esperado
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 // Constrói a imagem Docker
-                bat 'docker build -t nome-da-imagem .'
+                bat 'docker build -t nome-da-imagem .' // Altere 'nome-da-imagem' conforme necessário
             }
         }
 
         stage('Deploy') {
             steps {
                 // Executa o contêiner Docker
-                bat 'docker run -d -p 3000:3000 nome-da-imagem'
+                bat 'docker run -d -p 3000:3000 nome-da-imagem' // Certifique-se de que a porta esteja correta
             }
         }
     }
@@ -41,7 +41,7 @@ pipeline {
     post {
         always {
             // Arquiva o relatório de teste gerado pelo Mocha
-            junit '**/results.xml'
+            junit '**/results.xml' // Verifique se o caminho do arquivo está correto
 
             // Exibe uma mensagem se a pipeline falhar
             script {
