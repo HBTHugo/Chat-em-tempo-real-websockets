@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.002" tests="1" failures="0">
-  <testsuite name="Root Suite" timestamp="2024-09-23T01:13:01" tests="0" time="0.000" failures="0">
+<testsuites name="Mocha Tests" time="2.092" tests="3" failures="1">
+  <testsuite name="Root Suite" timestamp="2024-09-23T17:14:52" tests="0" time="0.000" failures="0">
   </testsuite>
-  <testsuite name="Teste Básico" timestamp="2024-09-23T01:13:01" tests="1" file="C:\Users\Heber\Desktop\Projeto petsaju\Chat-em-tempo-real-websockets\test\test.js" time="0.001" failures="0">
+  <testsuite name="Teste Básico" timestamp="2024-09-23T17:14:52" tests="1" file="C:\Users\Heber\Desktop\Projeto petsaju\Chat-em-tempo-real-websockets\test\test.js" time="0.001" failures="0">
     <testcase name="Teste Básico Deve retornar verdadeiro" time="0.000" classname="Deve retornar verdadeiro">
+    </testcase>
+  </testsuite>
+  <testsuite name="Teste de Conexão WebSocket" timestamp="2024-09-23T17:14:52" tests="1" file="C:\Users\Heber\Desktop\Projeto petsaju\Chat-em-tempo-real-websockets\test\test.js" time="0.035" failures="0">
+    <testcase name="Teste de Conexão WebSocket Deve conectar ao servidor WebSocket" time="0.000" classname="Deve conectar ao servidor WebSocket">
+    </testcase>
+  </testsuite>
+  <testsuite name="Teste de Envio de Mensagem" timestamp="2024-09-23T17:14:52" tests="1" file="C:\Users\Heber\Desktop\Projeto petsaju\Chat-em-tempo-real-websockets\test\test.js" time="2.055" failures="1">
+    <testcase name="Teste de Envio de Mensagem Deve enviar e receber uma mensagem" time="2.026" classname="Deve enviar e receber uma mensagem">
+      <failure message="Timeout of 2000ms exceeded. For async tests and hooks, ensure &quot;done()&quot; is called; if returning a Promise, ensure it resolves. (C:\Users\Heber\Desktop\Projeto petsaju\Chat-em-tempo-real-websockets\test\test.js)" type="Error"><![CDATA[Error: Timeout of 2000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (C:\Users\Heber\Desktop\Projeto petsaju\Chat-em-tempo-real-websockets\test\test.js)
+    at listOnTimeout (node:internal/timers:564:17)
+    at process.processTimers (node:internal/timers:507:7)]]></failure>
     </testcase>
   </testsuite>
 </testsuites>
