@@ -4,21 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Socialzap</title>
-    <link rel="stylesheet" href="style.css">
 </head>
+
+
+<style>
+    /* Estilos gerais do corpo */
+    body {
+        background-image: url('https://res.cloudinary.com/cloudinary-marketing/images/c_fill,w_700/f_auto,q_auto/v1649720751/Web_Assets/blog/Mario_1/Mario_1-gif?_i=AA');
+    background-size: cover; /* Ajusta o tamanho para cobrir toda a área */
+    background-repeat: no-repeat; /* Não repete o GIF */
+    background-position: center; /* Centraliza o GIF */
+        display: flex;
+        font-family: Arial, sans-serif;
+        background-color: #86009b;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0; /* Remover margem para evitar espaçamento indesejado */
+        padding: 0; /* Remover padding para evitar espaçamento indesejado */
+    }
+
+    /* Container do chat */
+    #chat {
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px; /* Largura máxima do chat */
+        height: 400px; /* Altura fixa do chat */
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Lista de mensagens */
+    #messages {
+        list-style-type: none;
+        padding: 0;
+        overflow-y: auto; /* Permite rolagem quando as mensagens excedem a altura */
+        flex-grow: 1; /* Faz com que a lista cresça e ocupe espaço disponível */
+        margin-bottom: 10px;
+        max-height: 350px; /* Altura máxima para a lista de mensagens */
+    }
+
+    /* Estilo das mensagens */
+    #messages li {
+        padding: 25px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+    }
+
+    /* Estilos do formulário */
+    #input {
+        display: flex;
+    }
+
+    #messageInput {
+        flex: 1; /* O campo de mensagem ocupa o máximo de espaço */
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin:auto;
+    }
+
+    /* Estilo do botão de enviar */
+    button {
+        background-color: #5cb85c;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #4cae4c;
+    }
+
+    /* Estilo do campo de nome */
+    #user-info {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+</style>
+
 <body>
+    
     <!-- Campo para o nome do usuário -->
     <div id="user-info">
         <input type="text" id="username" placeholder="Digite seu nome..." required />
         <button id="enter-chat">Entrar no chat</button>
     </div>
-
+    
     <!-- Chat (escondido até o usuário entrar) -->
     <div id="chat" style="display: none;">
         <ul id="messages"></ul>
         <form id="input" autocomplete="off">
             <input type="text" id="messageInput" placeholder="Digite sua mensagem..." />
-            <button type="submit">Send</button>
+            <button type="submit">Enviar</button>
         </form>
     </div>
 
@@ -54,7 +136,9 @@
             var item = document.createElement('li');
             item.innerHTML = `<span style="color: ${data.color};">${data.user}</span>: ${data.message}`; // Exibe o nome colorido
             document.getElementById('messages').appendChild(item);
-            window.scrollTo(0, document.body.scrollHeight);
+            // Faz a barra de rolagem ir para o final
+            var messagesContainer = document.getElementById('messages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
 
         // Recebe as últimas 10 mensagens do servidor quando o usuário se conecta
