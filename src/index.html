@@ -109,7 +109,7 @@
         var socket = io();
         var username = '';
         var userColor = '';
-
+    
         // Função para gerar uma cor aleatória
         function getRandomColor() {
             var letters = '0123456789ABCDEF';
@@ -119,7 +119,7 @@
             }
             return color;
         }
-
+    
         // Quando o usuário clica para entrar no chat
         document.getElementById('enter-chat').addEventListener('click', function() {
             var inputUsername = document.getElementById('username').value;
@@ -130,37 +130,36 @@
                 document.getElementById('chat').style.display = 'block'; // Exibe o chat
             }
         });
-
+    
         // Exibe uma mensagem no chat
         function displayMessage(data) {
             var item = document.createElement('li');
-            item.innerHTML = `<span style="color: ${data.color};">${data.user}</span>: ${data.message}`; // Exibe o nome colorido
+            item.innerHTML = `<span style="color: ${data.color};">${data.user}</span>: ${data.message}`;
             document.getElementById('messages').appendChild(item);
-            // Faz a barra de rolagem ir para o final
             var messagesContainer = document.getElementById('messages');
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
-
+    
         // Recebe as últimas 10 mensagens do servidor quando o usuário se conecta
         socket.on('previousMessages', function(messages) {
-            messages.forEach(displayMessage); // Exibe cada mensagem recebida
+            messages.forEach(displayMessage);
         });
-
+    
         // Envia a mensagem ao servidor junto com o nome e a cor do usuário
         var form = document.getElementById('input');
         var input = document.getElementById('messageInput');
-
+    
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             if (input.value && username) {
-                // Envia a mensagem, o nome e a cor do usuário para o servidor
                 socket.emit('chat message', { user: username, color: userColor, message: input.value });
                 input.value = '';
             }
         });
-
+    
         // Recebe as mensagens do servidor e exibe no chat
         socket.on('chat message', displayMessage);
     </script>
+    
 </body>
 </html>

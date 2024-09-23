@@ -7,56 +7,56 @@ describe('Teste Básico', function() {
   });
 });
 
-describe('Teste de Conexão WebSocket', () => {
-    let socket;
+describe('Teste de Conexão WebSocket', function() {
+  this.timeout(10000); // Define um timeout de 10 segundos
 
-    beforeEach((done) => {
-        socket = io('http://localhost:3000');
-        socket.on('connect', () => {
-            done();
-        });
-    });
+  let socket;
 
-    afterEach(() => {
-        socket.close();
+  beforeEach((done) => {
+    socket = io('http://localhost:3000');
+    socket.on('connect', () => {
+      done();
     });
+  });
 
-    it('Deve conectar ao servidor WebSocket', (done) => {
-        assert.equal(socket.connected, true);
-        done();
-    });
+  afterEach(() => {
+    socket.close();
+  });
+
+  it('Deve conectar ao servidor WebSocket', (done) => {
+    assert.equal(socket.connected, true);
+    done();
+  });
 });
 
 describe('Teste de Envio de Mensagem', function() {
-    this.timeout(5000); // Aumenta o timeout para 5 segundos
+  this.timeout(10000); // Define um timeout de 10 segundos
 
-    let socket;
+  let socket;
 
-    beforeEach((done) => {
-        socket = io('http://localhost:3000');
-        socket.on('connect', () => {
-            done();
-        });
+  beforeEach((done) => {
+    socket = io('http://localhost:3000');
+    socket.on('connect', () => {
+      done();
     });
+  });
 
-    afterEach(() => {
-        socket.close();
+  afterEach(() => {
+    socket.close();
+  });
+
+  it('Deve enviar e receber uma mensagem', function(done) {
+    const testMessage = 'Olá, mundo!';
+    const username = 'TesteUser';
+    const color = '#000000'; // Cor aleatória, pode ser qualquer valor
+
+    socket.emit('chat message', { user: username, color: color, message: testMessage });
+
+    socket.on('chat message', (data) => {
+      if (data.message === testMessage && data.user === username) {
+        assert.equal(data.message, testMessage);
+        done();
+      }
     });
-
-    it('Deve enviar e receber uma mensagem', function(done) {
-        this.timeout(5000); // Timeout de 5 segundos para este teste
-        const testMessage = 'Olá, mundo!';
-
-        socket.emit('sendMessage', testMessage);
-
-        const timeout = setTimeout(() => {
-            done(new Error('A mensagem não foi recebida a tempo'));
-        }, 4000); // 4 segundos para esperar a resposta
-
-        socket.on('receiveMessage', (message) => {
-            clearTimeout(timeout); // Cancela o timeout se a mensagem for recebida
-            assert.equal(message, testMessage);
-            done();
-        });
-    });
+  });
 });

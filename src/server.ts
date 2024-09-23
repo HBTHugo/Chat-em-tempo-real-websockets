@@ -1,13 +1,13 @@
 import express, { Application } from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
-import path from 'path'; // Para servir o arquivo HTML
+import path from 'path';
 
 class App {
     private app: Application;
     private http: http.Server;
     private io: Server;
-    private messageHistory: Array<{ user: string, color: string, message: string }> = []; // Armazenar as últimas 10 mensagens
+    private messageHistory: Array<{ user: string, color: string, message: string }> = []; // Armazenar mensagens
 
     constructor() {
         this.app = express();
@@ -38,7 +38,7 @@ class App {
                 // Armazena a mensagem na memória (mantém apenas as últimas 10)
                 this.messageHistory.push({ user: data.user, color: data.color, message: data.message });
                 if (this.messageHistory.length > 10) {
-                    this.messageHistory.shift(); // Remove a mensagem mais antiga para manter apenas as últimas 10
+                    this.messageHistory.shift(); // Remove a mensagem mais antiga
                 }
 
                 // Envia a mensagem para todos os clientes conectados
@@ -54,9 +54,8 @@ class App {
 
     // Define as rotas para servir o HTML
     setupRoutes() {
-        // Servir o arquivo index.html na rota raiz
         this.app.get('/', (req, res) => {
-            res.sendFile(path.join(__dirname, 'index.html')); // Caminho absoluto para o index.html
+            res.sendFile(path.join(__dirname, 'index.html')); // Servir o HTML
         });
     }
 }
